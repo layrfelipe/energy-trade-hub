@@ -1,7 +1,6 @@
 "use client";
 
 import type { NextPage } from "next";
-import {FaToggleOn, FaToggleOff, FaWater, FaAtom } from "react-icons/fa"
 import styles from "~~/styles/Profile.module.scss"
 
 const Profile: NextPage = () => {
