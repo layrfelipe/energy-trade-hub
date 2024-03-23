@@ -2,11 +2,18 @@
 
 import React from "react";
 import styles from "~~/styles/Header.module.scss";
+import { RainbowKitCustomConnectButton } from "./scaffold-eth";
 
 export const Header = () => {
   return (
     <div className={styles.header}>
-      <h1>HERE GOES A HEADER</h1>
+      <div className={styles.logoWrapper}>
+        <img src="logo.png"/>
+      </div>
+
+      <div className={styles.userOptions}>
+        <RainbowKitCustomConnectButton />
+      </div>
     </div>
   )
 }

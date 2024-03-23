@@ -74,7 +74,14 @@ import styles from "~~/styles/Footer.module.scss"
 export const Footer = () => {
   return (
     <div className={styles.footer}>
-      <h1>HERE GOES A FOOTER</h1>
+      <div className={styles.logoWrapper}>
+        <img src="logo.png"/>
+      </div>
+
+      <div className={styles.listWrapper}>
+        <p>Made with love for ETHSamba</p>
+        {/* <li>Contact us</li> */}
+      </div>
     </div>
   )
 }
