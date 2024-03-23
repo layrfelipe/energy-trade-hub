@@ -7,8 +7,14 @@
         position: fixed;
         top: 0;
         padding: 3vh 2vw;
-        border-bottom: 2px solid white;
+        border-bottom: 4px solid white;
         background: #2d074c;
+        border-bottom: 3px solid transparent; /* Ensure the bottom border is transparent */
+        background-position: bottom;
+        background-size: 100% 3px; /* Width of the border and 100% of the width */
+        background-repeat: no-repeat;
+        // background-image: linear-gradient(to right, #E5C215, #e52e71); /* Your desired gradient */
+        background-image: linear-gradient(to right, #9b30ff, #ff69b4);
         
         .logoWrapper {
             display: flex;
