@@ -4,7 +4,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 7.5vh 0 2.5vh 0;
+        padding: 20vh 0 2.5vh 0;
         
         h1 {
             color: white;
@@ -16,7 +16,7 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            margin-top: 7.5vh;
+            margin-top: 10vh;
 
             .filtersContainer {
                 width: 30%;
@@ -26,10 +26,11 @@
                 align-items: flex-start;
 
                 h2 {
-                    text-align: center;
-                    align-self: center;
+                    text-align: left;
                     color: white;
                     font-size: 2rem;
+                    margin-left: 1vw;
+                    font-weight: 600;
                 }
 
                 .filtersContent {
@@ -38,7 +39,7 @@
                     padding: 0 1vw;
 
                     .toggleFilter {
-                        width: 100%;
+                        width: 45%;
                         background: white;
                         border-radius: 5px;
                         display: flex;
@@ -70,20 +71,22 @@
                         }
 
                         .inputFiltersContainer {
-                            width: 100%;
                             display: flex;
-                            justify-content: space-between;
+                            justify-content: flex-start;
                             margin-top: 1vh;
+                            width: 90%;
 
                             input {
                                 color: black;
                                 border-radius: 5px;
-                                padding: 1vh .25vw;
+                                padding: 1vh 0 1vh .25vw;
                                 outline: none;
+                                width: 40%;
                             }
 
                             span {
                                 color: white;
+                                margin: 0 1vw;
                             }
                         }
                     }
@@ -111,7 +114,7 @@
                             }
 
                             li:hover {
-                                color: #d0ccd4;
+                                color: #eeecf0;
                             }
                         }
                     }

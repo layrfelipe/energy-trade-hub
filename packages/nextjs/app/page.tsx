@@ -1,7 +1,7 @@
 "use client";
 
 import type { NextPage } from "next";
-import {FaToggleOn, FaToggleOff, FaWater, FaAtom } from "react-icons/fa"
+import {FaToggleOn, FaWater, FaAtom } from "react-icons/fa"
 import styles from "~~/styles/Home.module.scss"
 
 const Home: NextPage = () => {
@@ -24,14 +24,14 @@ const Home: NextPage = () => {
             <div className={styles.priceFilter}>
               <h3>Preço/MWh</h3>
               <div className={styles.inputFiltersContainer}>
-                <input placeholder="Mínimo" type="text"/>
+                <input placeholder="Mínimo (R$)" type="text"/>
                 <span>-</span>
-                <input placeholder="Máximo" type="text"/>
+                <input placeholder="Máximo (R$)" type="text"/>
               </div>
             </div>
 
             <div className={styles.categoryAndEnergyTypeFilter}>
-              <h3>Geradora</h3>
+              <h3>Geradoras</h3>
               <ul>
                 <li>Usina Hidrelétrica de Furnas</li>
                 <li>Usina Hidrelétrica de Itaipu</li>
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
             </div>
 
             <div className={styles.categoryAndEnergyTypeFilter}>
-              <h3>Tipo de energia</h3>
+              <h3>Tipos de energia</h3>
               <ul>
                 <li>Hidrelétrica</li>
                 <li>Nuclear</li>

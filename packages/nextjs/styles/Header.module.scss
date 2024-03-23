@@ -4,7 +4,11 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        position: fixed;
+        top: 0;
         padding: 3vh 2vw;
+        border-bottom: 2px solid white;
+        background: #2d074c;
         
         .logoWrapper {
             display: flex;
