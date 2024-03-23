@@ -1,0 +1,11 @@
+@media (min-width: 1024px) {
+    .appWrapper {
+        width: 100%;
+        
+        main {
+            padding: 0 1vw 5vh 1vw;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

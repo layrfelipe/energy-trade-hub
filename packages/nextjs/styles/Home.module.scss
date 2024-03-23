@@ -1,0 +1,173 @@
+@media (min-width: 1024px) {
+    .main {
+        width: 100%;
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 5vh;
+        
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .availableContractsDataContainer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5vh;
+
+            .filtersContainer {
+                width: 30%;
+                min-height: 30vh;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                h2 {
+                    text-align: center;
+                    align-self: center;
+                    color: white;
+                    font-size: 2rem;
+                }
+
+                .filtersContent {
+                    width: 100%;
+                    margin-top: 2vh;
+                    padding: 0 1vw;
+
+                    .toggleFilter {
+                        width: 100%;
+                        background: white;
+                        border-radius: 5px;
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 1vh .5vw;
+                        align-items: center;
+
+                        h4 {
+                            font-size: 1rem;
+                            font-weight: 500;
+                            color: #430C6F;
+                        }
+
+                        #toggleIconWrapper {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .priceFilter {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        margin: 2vh 0 3vh 0;
+
+                        h3 {
+                            color: white;
+                            font-size: 1.5rem;
+                            font-weight: 300;
+                        }
+
+                        .inputFiltersContainer {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-top: 1vh;
+
+                            input {
+                                color: black;
+                                border-radius: 5px;
+                                padding: 1vh .25vw;
+                                outline: none;
+                            }
+
+                            span {
+                                color: white;
+                            }
+                        }
+                    }
+
+                    .categoryAndEnergyTypeFilter {
+                        width: 100%;
+                        display: flex;
+                        margin-top: 2vh;
+                        flex-direction: column;
+                        align-items: flex-start;
+
+                        h3 {
+                            color: white;
+                            font-size: 1.5rem;
+                            font-weight: 300;
+                        }                    
+                        
+                        ul {
+                            text-decoration: none;
+
+                            li {
+                                color: #C2BAC9;
+                                margin: 1vh 0;
+                                cursor: pointer;
+                            }
+
+                            li:hover {
+                                color: #d0ccd4;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .contractsTableContainer {
+                width: 65%;
+                padding: 0 1vw 0 4vw;
+
+                .tableWrapper {
+                    width: 100%;
+
+                    table {
+                        width: 100%;
+                        color: white;
+                        table-layout: fixed;
+
+                        tr {
+                            text-align: center;
+                            cursor: pointer;
+                            
+                            th {
+                                padding-bottom: 2vh;
+                                border-bottom: 1px solid #C2BAC9;
+                                text-align: center;
+                                cursor: default;
+                            }
+                            
+                            td {
+                                text-align: center;
+                                padding: 3vh 0;
+                            }
+
+                            .iconTableData {
+                                .iconWrapper {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    vertical-align: middle;
+                                }
+                            }
+
+                            img {
+                                width: 4vw;
+                                height: 4vw;
+                            }
+                        }
+
+                        tr:not(:first-child):hover {
+                            background-color: #4c117c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

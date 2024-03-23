@@ -1,0 +1,89 @@
+@media (min-width: 1024px) {
+    .profileContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 7.5vh 0;
+
+        .profileMainDataWrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .imageWrapper {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 10vw;
+                }
+            }
+            
+            h2 {
+                text-align: center;
+                font-size: 3rem;
+                font-weight: 500;
+                color: white;
+                margin-top: 3vh;
+            }
+            
+            .tabsWrapper {
+                width: 50%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                place-items: center;
+                margin-top: 5vh;
+
+                :first-child {
+                    border-bottom: 1px solid white;
+                    padding-bottom: 1vh;
+                }
+    
+                h3 {
+                    color: white;
+                    font-size: 1.25rem;
+                    font-weight: 300;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .contractsWrapper {
+            width: 75%;
+            padding-top: 7.5vh;
+
+            .contractsGrid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                place-items: center;
+                column-gap: 3vw;
+                row-gap: 3vw;
+
+                .contractCard {
+                    width: 70%;
+                    height: 35vh;
+                    background: #d3d3d3;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        button {
+            color: white;
+            border: 2px solid white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1vh 10vw;
+            margin-top: 7.5vh;
+            font-size: 1.25rem;
+        }
+    }
+}
