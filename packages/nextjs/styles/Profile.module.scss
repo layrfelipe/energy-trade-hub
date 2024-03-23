@@ -21,6 +21,7 @@
 
                 img {
                     width: 10vw;
+                    border-radius: 10px;
                 }
             }
             
@@ -66,9 +67,32 @@
 
                 .contractCard {
                     width: 70%;
-                    height: 35vh;
-                    background: #d3d3d3;
                     border-radius: 10px;
+                    padding: 2vh 1vw;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    border: 1px solid white;
+                    cursor: pointer;
+
+                    .imageWrapper {
+                        width: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 5vh;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+
+                    p {
+                        text-align: left;
+                        align-self: flex-start;
+                        color: white;
+                    }
                 }
             }
         }

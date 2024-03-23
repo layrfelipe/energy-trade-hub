@@ -1,0 +1,61 @@
+@media (min-width: 1024px) {
+    .main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            padding: 7.5vh 0;
+
+            h1, h2 {
+                color: white;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                margin-top: 3vh;
+            }
+
+            .inputsWrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 4vh;
+                width: 50%;
+
+                input {
+                    width: 100%;
+                    background: none;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    padding: 1vh 2vw;
+                    margin-bottom: 2vh;
+                }
+            }
+
+            button {
+                border: 2px solid white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 5vh;
+                color: white;
+                padding: 1vh 5vw;
+                font-size: 1.5rem;
+                font-weight: 500;
+                cursor: pointer;
+            }
+        }
+    }
+}

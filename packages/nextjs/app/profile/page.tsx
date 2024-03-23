@@ -22,12 +22,96 @@ const Profile: NextPage = () => {
 
         <div className={styles.contractsWrapper}>
             <div className={styles.contractsGrid}>
-                <div className={styles.contractCard}></div>
-                <div className={styles.contractCard}></div>
-                <div className={styles.contractCard}></div>
-                <div className={styles.contractCard}></div>
-                <div className={styles.contractCard}></div>
-                <div className={styles.contractCard}></div>
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+
+                <div className={styles.contractCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src="furnas.png" />
+                    </div>
+
+                    <p>FURNAS</p>
+                    <p>2 ETH</p>
+                    <p>0.024 ETH/KWh</p>
+                    <p>24/03/2024</p>
+                    <p>24/03/2030</p>
+                    <p>6 anos</p>
+                    <p>Sudeste</p>
+                    <p>Hidrelétrica</p>
+                </div>
+                
             </div>
         </div>
 
