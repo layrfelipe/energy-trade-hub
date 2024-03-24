@@ -11,8 +11,8 @@ const Token: NextPage = () => {
   
   const [contractPrice, setContactPrice] = useState("")
   const [energyAmount, setEnergyAmount] = useState("")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
+  // const [startDate, setStartDate] = useState<BigInt | undefined>()
+  // const [endDate, setEndDate] = useState<BigInt | undefined>()
   const [energyType, setEnergyType] = useState("")
   const [region, setRegion] = useState("")
   
@@ -26,6 +26,17 @@ const Token: NextPage = () => {
     },
   })
 
+  // const handleChangeStartDate = (e: any) => {
+  //   const inputDate = e.target.value
+  //   const unix = Math.floor(inputDate.getTime() / 1000)
+  //   console.log(unix)
+  // }
+
+  // const handleChangeEndDate = (e: any) => {
+  //   const inputDate = e.target.value
+  //   const unix = Math.floor(inputDate.getTime() / 1000)
+  // }
+
   return (
     <div className={styles.main}>
         <div className={styles.content}>
@@ -37,8 +48,8 @@ const Token: NextPage = () => {
                 <input placeholder="Quantidade de energia" type="text" onChange={e => setEnergyAmount(e.target.value)} value={energyAmount}/>
                 <input placeholder="Tipo de energia" type="text" onChange={e => setEnergyType(e.target.value)} value={energyType}/>
                 <input placeholder="Região" type="text" onChange={e => setRegion(e.target.value)} value={region}/>
-                <input placeholder="Data início" type="text" onChange={e => setStartDate(e.target.value)} value={startDate}/>
-                <input placeholder="Data fim" type="text" onChange={e => setEndDate(e.target.value)} value={endDate}/>
+                <input placeholder="Data início (dd/mm/yyyy)" value="24/03/2024"/>
+                <input placeholder="Data fim (dd/mm/yyyy)" value="24/03/2026"/>
             </div>
 
             <button onClick={() => writeAsync()}>CRIAR TOKEN</button>

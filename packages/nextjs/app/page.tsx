@@ -252,6 +252,8 @@ const Home: NextPage = () => {
                   <th>Preço/MWh</th>
                   <th>Região</th>
                   <th>Tipo</th>
+                  <th>Início</th>
+                  <th>Fim</th>
                 </tr>
               </thead>
 
@@ -269,6 +271,8 @@ const Home: NextPage = () => {
                       <FaWater color="white" size={30} />
                     </div>
                   </td>
+                  <td>2024</td>
+                  <td>2026</td>
                 </tr>
 
                 <tr>
@@ -276,14 +280,16 @@ const Home: NextPage = () => {
                     <img src="/eletro-nuclear.png" />
                   </td>
                   <td>ANGRA I</td>
-                  <td>2 ETH</td>
-                  <td>0.024 ETH</td>
+                  <td>1 ETH</td>
+                  <td>0.018 ETH</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
                       <FaAtom color="white" size={30} />
                     </div>
                   </td>
+                  <td>2024</td>
+                  <td>2028</td>
                 </tr>
 
                 <tr>
@@ -292,13 +298,15 @@ const Home: NextPage = () => {
                   </td>
                   <td>ANGRA II</td>
                   <td>2 ETH</td>
-                  <td>0.024 ETH</td>
+                  <td>0.02 ETH</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
                       <FaAtom color="white" size={30} />
                     </div>
                   </td>
+                  <td>2024</td>
+                  <td>2030</td>
                 </tr>
 
                 <tr>
@@ -306,7 +314,7 @@ const Home: NextPage = () => {
                     <img src="/furnas.png" />
                   </td>
                   <td>FURNAS</td>
-                  <td>2 ETH</td>
+                  <td>1 ETH</td>
                   <td>0.024 ETH</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
@@ -314,6 +322,8 @@ const Home: NextPage = () => {
                       <FaWater color="white" size={30} />
                     </div>
                   </td>
+                  <td>2025</td>
+                  <td>2027</td>
                 </tr>
               </tbody>
             </table>
