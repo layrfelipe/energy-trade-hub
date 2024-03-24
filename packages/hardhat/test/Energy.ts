@@ -24,6 +24,7 @@ describe("EnergyTradeHub Contract", function () {
     energyTradeHub = (await energyTradeHubFactory.deploy(
       arbitrator.getAddress(),
       arbitrator.getAddress(),
+      "evidence"
     )) as EnergyTradeHub;
     await energyTradeHub.waitForDeployment();
 

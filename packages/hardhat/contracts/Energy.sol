@@ -37,7 +37,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
     enum RulingOptions { RefusedToArbitrate, PayerWins, PayeeWins }
 
     // Structs
-    struct EnergyContract {
+    struct Energy {
         uint256 id;
         address issuer;
         address owner;
@@ -63,7 +63,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
     }
 
     // Mappings
-    mapping(uint256 => EnergyContract) public tokens;
+    mapping(uint256 => Energy) public tokens;
     mapping(uint256 => TokenSale) public tokenSales;
     mapping(uint256 => Escrow) public escrows;
 
@@ -76,7 +76,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
     event EscrowCreated(uint256 tokenId, uint256 amount);
     event EscrowReleased(uint256 tokenId);
     event EscrowRefunded(uint256 tokenId);
-    event Evidence(IArbitrator indexed arbitrator, uint256 indexed disputeID, address indexed party, string evidence);
+
 
     // Errors
     error InvalidStatus();
@@ -124,6 +124,10 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 		grantRole(PROVIDER_ROLE, provider);
 	}
 
+	function isProvider() public returns (bool) {
+		return hasRole(PROVIDER_ROLE, msg.sender);
+	}
+
 	// Token Lifecycle Management
 	function createToken(
 		address issuer,
@@ -144,7 +148,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 		_mint(issuer, newTokenId);
 		_setTokenURI(newTokenId, tokenURI);
 
-		tokens[newTokenId] = EnergyContract(
+		tokens[newTokenId] = Energy(
 			newTokenId,
 			issuer,
 			issuer, // Initially, the issuer is the owner
@@ -256,6 +260,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 		require(hasRole(PROVIDER_ROLE, msg.sender), "Caller is not a provider");
 		_;
 	}
+}
 
 
 
