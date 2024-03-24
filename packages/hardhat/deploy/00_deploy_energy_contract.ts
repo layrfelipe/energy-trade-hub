@@ -17,7 +17,7 @@ const deployEnergyContract: DeployFunction = async function (hre: HardhatRuntime
   await deploy("EnergyTradeHub", {
     from: deployer,
     // Contract constructor arguments
-    args: [arbitrator.address, arbitrator.address],
+    args: [arbitrator.address, arbitrator.address, "evidence"],
     log: true,
     autoMine: true,
   });
