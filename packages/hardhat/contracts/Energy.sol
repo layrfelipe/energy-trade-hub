@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
@@ -10,7 +11,7 @@ import "hardhat/console.sol";
 import "./IArbitrator.sol";
 import "./IEvidence.sol";
 
-contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Ownable, IArbitrable, IEvidence {
+contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, AccessControl, Ownable, IArbitrable, IEvidence {
     using Address for address payable;
 
     // Constants
@@ -35,6 +36,25 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
     Status public status;
 
     enum RulingOptions { RefusedToArbitrate, PayerWins, PayeeWins }
+
+	//Overides
+	function _beforeTokenTransfer(
+		address from,
+		address to,
+		uint256 firstTokenId,
+		uint256 batchSize
+	) internal virtual override (ERC721, ERC721Enumerable) {
+		super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
+	}
+
+	function _burn(uint256 tokenId) internal virtual override (ERC721, ERC721URIStorage) {
+		super._burn(tokenId);
+	}
+
+	function tokenURI(uint256 tokenId) public view virtual override(ERC721, ERC721URIStorage) returns (string memory) {
+		return super.tokenURI(tokenId);
+	}
+	
 
     // Structs
     struct Energy {
@@ -109,7 +129,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 	}
 
 	// Supports Interface Override
-	function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl) returns (bool) {
+	function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl, ERC721Enumerable) returns (bool) {
 		return ERC721.supportsInterface(interfaceId) || AccessControl.supportsInterface(interfaceId);
 	}
 
