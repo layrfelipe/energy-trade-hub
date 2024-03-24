@@ -124,7 +124,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 		grantRole(PROVIDER_ROLE, provider);
 	}
 
-	function isProvider() public returns (bool) {
+	function isProvider() public view returns (bool) {
 		return hasRole(PROVIDER_ROLE, msg.sender);
 	}
 
