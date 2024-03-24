@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { FaAtom, FaWater } from "react-icons/fa";
 import styles from "~~/styles/Home.module.scss";
+import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const [selectedRegion, setSelectedRegion] = useState("0");
@@ -21,6 +22,49 @@ const Home: NextPage = () => {
   const [isNuclearFilterChecked, setIsNuclearFilterChecked] = useState(false);
   const [isEolicFilterChecked, setIsEolicFilterChecked] = useState(false);
   const [isPhotovoltaicFilterChecked, setIsPhotovoltaicFilterChecked] = useState(false);
+
+  // async function getAllTokens() {
+  //   const amount = await myToken.totalSupply()
+  //   let tokens = []
+  //   for (let i = 0; i < amount; i++) {
+  //     tokens.push(String(await myToken.tokenByIndex(i)))
+  //   }
+  //   return tokens
+  // }
+
+  const [totalSupply, setTotalSupply] = useState(0)
+  const [tokens, setTokens] = useState<any[]>([])
+
+  const [tokensIndex, setTokensIndex] = useState(0)
+
+  const { data: supply} = useScaffoldContractRead({
+    contractName: "EnergyTradeHub",
+    functionName: "totalSupply",
+  })
+
+  const { data: tokenByIndexData } = useScaffoldContractRead({
+    contractName: "EnergyTradeHub",
+    functionName: "tokenByIndex",
+    args: [BigInt(tokensIndex)],
+    watch: true,
+    
+  })
+
+  useEffect(() => {
+    if (supply && Number(supply) > 0) {
+      setTotalSupply(Number(supply))
+    }
+  }, [supply])
+
+  useEffect(() => {
+    if (totalSupply > 0) {
+      for (let i=0; i < totalSupply; i++) {
+        let token = tokenByIndexData
+        console.log(token)
+        setTokensIndex(tokensIndex + 1)
+      }
+    }
+  }, [totalSupply])
 
   const handleApplyFilters = () => {
     if (parseFloat(minPrice) > 99999) {
@@ -206,7 +250,6 @@ const Home: NextPage = () => {
                   <th>Geradora</th>
                   <th>Valor do contrato</th>
                   <th>Preço/MWh</th>
-                  <th>Preço/MWh</th>
                   <th>Região</th>
                   <th>Tipo</th>
                 </tr>
@@ -220,7 +263,6 @@ const Home: NextPage = () => {
                   <td>FURNAS</td>
                   <td>2 ETH</td>
                   <td>0.024 ETH</td>
-                  <td>5 anos</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
@@ -236,7 +278,6 @@ const Home: NextPage = () => {
                   <td>ANGRA I</td>
                   <td>2 ETH</td>
                   <td>0.024 ETH</td>
-                  <td>5 anos</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
@@ -252,7 +293,6 @@ const Home: NextPage = () => {
                   <td>ANGRA II</td>
                   <td>2 ETH</td>
                   <td>0.024 ETH</td>
-                  <td>5 anos</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
@@ -268,7 +308,6 @@ const Home: NextPage = () => {
                   <td>FURNAS</td>
                   <td>2 ETH</td>
                   <td>0.024 ETH</td>
-                  <td>5 anos</td>
                   <td>Sudeste</td>
                   <td className={styles.iconTableData}>
                     <div className={styles.iconWrapper}>
