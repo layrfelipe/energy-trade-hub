@@ -15,7 +15,9 @@ Welcome to the **Energy Trade Hub**, a pioneering Web3 marketplace dedicated to 
 - **OpenZeppelin Contracts**: Utilizing industry-standard secure smart contracts for ERC721 (NFT) and Access Control.
 - **Kleros Contracts**: Integrating dispute resolution mechanisms with ERC 792 (Arbitration) and ERC-1497 (Evidence) standards.
 - **HardHat**: A development environment for testing, compiling, and deploying Ethereum software.
-- **Deployed on Scroll Sepolia**: The contract is deployed at [0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc](https://sepolia.scrollscan.com/address/0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc).
+- **Deployed on Scroll Sepolia**: The contract is deployed at [0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc](https://sepolia.scrollscan.com/address/0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc)
+- **Hosted by Vercel**: Dapp is [LIVE] (https://ethsamba-2024-1obxkyarl-wlademyr-mendes-projects.vercel.app)
+
 
 ## 📚 Getting Started
 
