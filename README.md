@@ -1,80 +1,57 @@
-# 🏗 Scaffold-ETH 2
+```markdown
+# Energy Trade Hub: A Web3 Marketplace for Energy Trading in Brazil
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+Welcome to the **Energy Trade Hub**, a pioneering Web3 marketplace dedicated to revolutionizing energy trading in Brazil. Leveraging the power of blockchain technology, this platform enables seamless trade of energy tokens, representing various types of domestically generated energy. Aimed at facilitating a more advantageous, practical, and efficient negotiation process for energy generators and retail traders, Energy Trade Hub is set to be a game-changer in the industry.
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## 🚀 Features
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+- **Tokenized Energy Trading:** Trade tokens representing diverse energy sources generated across Brazil.
+- **Efficient Negotiation:** Streamline negotiations between energy producers and retailers.
+- **Regulatory Compliance:** Designed to maintain a smooth relationship with Brazil's energy regulatory body, CCEE.
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## 🛠️ Built With
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+- **Scaffold-ETH 2**: A robust framework for Ethereum development, combining Wagmi and HardHat for a comprehensive development environment.
+- **React**: For a dynamic and responsive user interface that ensures a seamless user experience.
+- **OpenZeppelin Contracts**: Utilizing industry-standard secure smart contracts for ERC721 (NFT) and Access Control.
+- **Kleros Contracts**: Integrating dispute resolution mechanisms with ERC 792 (Arbitration) and ERC-1497 (Evidence) standards.
+- **HardHat**: A development environment for testing, compiling, and deploying Ethereum software.
 
-## Requirements
+## 📚 Getting Started
 
-Before you begin, you need to install the following tools:
+To get a local copy up and running follow these simple steps.
 
-- [Node (>= v18.17)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+### Prerequisites
 
-## Quickstart
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/) package manager
+- [Git](https://git-scm.com/)
 
-To get started with Scaffold-ETH 2, follow the steps below:
+### Installation
 
-1. Clone this repo & install dependencies
+1. **Clone the repo**
+   ```sh
+   git clone https://github.com/your-username/energy-trade-hub.git
+   ```
+2. **Navigate to the project directory**
+   ```sh
+   cd energy-trade-hub
+   ```
+3. **Install NPM packages**
+   ```sh
+   yarn install
+   ```
+4. **Start the development server**
+   ```sh
+   yarn start
+   ```
+
+## 📝 Usage
+
+After starting the development server, the web application will be accessible at `http://localhost:3000`. From there, you can explore the various functionalities of the Energy Trade Hub, including viewing available energy tokens, initiating trades, and more.
+
+## 📦 Deployment
+
+For instructions on deploying the Energy Trade Hub to a live environment, please refer to the deployment section of the HardHat documentation.
 
 ```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
-yarn install
-```
-
-2. Run a local network in the first terminal:
-
-```
-yarn chain
-```
-
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
-
-3. On a second terminal, deploy the test contract:
-
-```
-yarn deploy
-```
-
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-yarn start
-```
-
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
