@@ -157,7 +157,7 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		string memory sourceType,
 		string memory deliveryPoint,
 		string memory contractTermsHash,
-		string memory tokenURI
+		string memory tokenURILiteral
 	) public onlyProvider returns (uint256) {
 		require(startDate < endDate, "Start date must be before end date.");
 		require(energyAmountMWh > 0, "Energy amount must be greater than 0 MWh.");
@@ -165,7 +165,7 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		tokenCount++;
 		uint256 newTokenId = tokenCount;
 		_mint(msg.sender, newTokenId);
-		_setTokenURI(newTokenId, tokenURI);
+		_setTokenURI(newTokenId, tokenURILiteral);
 
 		tokens[newTokenId] = Energy(
 			newTokenId,
@@ -303,7 +303,3 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		_;
 	}
 }
-
-
-
-
