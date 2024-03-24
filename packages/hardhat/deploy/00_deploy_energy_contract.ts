@@ -1,15 +1,23 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-// import { Contract } from "ethers";
+// import { SimpleCentralizedArbitrator } from "../contracts/SimpleCentralizedArbitrator.sol";
 
 const deployEnergyContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("EnergyTradeHub", {
+  const arbitrator = await deploy("SimpleCentralizedArbitrator", {
     from: deployer,
     // Contract constructor arguments
     args: [],
+    log: true,
+    autoMine: true,
+  });
+
+  await deploy("EnergyTradeHub", {
+    from: deployer,
+    // Contract constructor arguments
+    args: [arbitrator.address, arbitrator.address],
     log: true,
     autoMine: true,
   });

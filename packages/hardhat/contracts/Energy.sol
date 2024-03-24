@@ -6,10 +6,18 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
+import "./IArbitrator.sol"; // Interface for Arbitration (ERC-792)
 
-contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl {
+
+
+contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Ownable {
 	using Address for address payable;
+
+	IArbitrator private arbitrator;
+	address private arbitrationExtraData;
+
 
 	bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
 	bytes32 public constant PROVIDER_ROLE = keccak256("PROVIDER_ROLE");
@@ -68,9 +76,7 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl {
 	event EscrowReleased(uint256 tokenId);
 	event EscrowRefunded(uint256 tokenId);
 
-	constructor() ERC721("EnergyTradeHubToken", "ETHB") {
-		
-		console.log("Sender",msg.sender);
+	constructor(IArbitrator _arbitrator, address _arbitrationExtraData) ERC721("EnergyTradeHubToken", "ETHB") {
 
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         // Setup other roles
@@ -231,11 +237,26 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl {
 			"You must own the token to burn it."
 		);
 
-		// isActive is checked instead of the valid period for simplicity
+
 		require(tokens[tokenId].isActive, "The token is not active.");
 
 		tokens[tokenId].isActive = false; // Deactivate token upon burning
 		_burn(tokenId);
 		emit TokenBurned(tokenId, msg.sender);
 	}
+
+	function raiseDispute(uint256 tokenId, uint256 _options, bytes memory _extraData) external payable {
+        require(ownerOf(tokenId) == msg.sender, "Caller is not the owner of the token");
+
+        uint256 disputeID = arbitrator.createDispute{value: msg.value}(_options, _extraData);
+        
+        // Logic to link the disputeID with the tokenId if needed
+    }
+
+    function rule(uint256 disputeID, uint256 ruling) external {
+        require(msg.sender == address(arbitrator), "Only the arbitrator can enforce a ruling");
+        // Apply the ruling to the dispute, potentially affecting the associated energy contract NFT
+    }
+
+
 }

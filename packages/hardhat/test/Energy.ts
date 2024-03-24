@@ -1,24 +1,30 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { Signer } from "ethers";
-import { EnergyTradeHub } from "../typechain-types";
+import { EnergyTradeHub, SimpleCentralizedArbitrator } from "../typechain-types";
 
 describe("EnergyTradeHub Contract", function () {
-  //   let EnergyTradeHub: Contract;
   let energyTradeHub: EnergyTradeHub;
+  let arbitrator: SimpleCentralizedArbitrator;
   let admin: Signer, provider: Signer, consumer: Signer;
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
     const energyTradeHubFactory = await ethers.getContractFactory("EnergyTradeHub");
+    const arbitratorFactory = await ethers.getContractFactory("SimpleCentralizedArbitrator");
 
     const signers = await ethers.getSigners();
 
     [admin, provider, consumer] = signers;
 
+    arbitrator = (await arbitratorFactory.deploy()) as SimpleCentralizedArbitrator;
+
     // Deploy a new EnergyTradeHub contract for each test
     // energyTradeHub = await energyTradeHubFactory.deploy();
-    energyTradeHub = (await energyTradeHubFactory.deploy()) as EnergyTradeHub;
+    energyTradeHub = (await energyTradeHubFactory.deploy(
+      arbitrator.getAddress(),
+      arbitrator.getAddress(),
+    )) as EnergyTradeHub;
     await energyTradeHub.waitForDeployment();
 
     // throw new Error(await energyTradeHub.PROVIDER_ROLE());
