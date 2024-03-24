@@ -25,9 +25,9 @@
                 }
             }
             
-            h2 {
+            h4 {
                 text-align: center;
-                font-size: 3rem;
+                font-size: 1.25rem;
                 font-weight: 500;
                 color: white;
                 margin-top: 3vh;
@@ -40,7 +40,13 @@
                 place-items: center;
                 margin-top: 5vh;
 
-                :first-child {
+                .notSelected {
+                    border: none;
+                    font-weight: 400;
+                    padding: 0;
+                }
+
+                .selected {
                     border-bottom: 1px solid white;
                     padding-bottom: 1vh;
                     font-weight: 500;

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     EnergyTradeHub: {
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -1891,9 +1891,9 @@ const deployedContracts = {
       },
     },
   },
-  534351: {
+  11155111: {
     EnergyTradeHub: {
-      address: "0xC976c932092ECcD8f328FfD85066C0c05ED54044",
+      address: "0x59709F5D18f0511616E79eC7461e2733b0AA89e5",
       abi: [
         {
           inputs: [
@@ -3390,7 +3390,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     SimpleCentralizedArbitrator: {
-      address: "0x24d41dbc3d60d0784f8a937c59FBDe51440D5140",
+      address: "0x784f806d1f5c51557dd094dEbFDF13C3DF995385",
       abi: [
         {
           inputs: [
