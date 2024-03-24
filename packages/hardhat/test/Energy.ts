@@ -24,7 +24,7 @@ describe("EnergyTradeHub Contract", function () {
     energyTradeHub = (await energyTradeHubFactory.deploy(
       arbitrator.getAddress(),
       arbitrator.getAddress(),
-      "evidence"
+      "evidence",
     )) as EnergyTradeHub;
     await energyTradeHub.waitForDeployment();
 
@@ -68,7 +68,7 @@ describe("EnergyTradeHub Contract", function () {
     // let tokenID: number;
 
     // beforeEach(async function () {
-      // Create a token as provider
+    // Create a token as provider
     //   const createTokenTx = await energyTradeHub.connect(provider).createToken(
     //     await provider.getAddress(),
     //     100, // energyAmountMWh
@@ -81,8 +81,8 @@ describe("EnergyTradeHub Contract", function () {
     //     "tokenURI",
     //   );
     //  await createTokenTx.wait();
-    
-     //   const event = receipt.logs
+
+    //   const event = receipt.logs
     //   .find((log) => log.event === "TokenCreated")
     //   .args.id.toNumber();
 
