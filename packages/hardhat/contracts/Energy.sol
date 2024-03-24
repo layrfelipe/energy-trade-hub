@@ -157,7 +157,7 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		string memory sourceType,
 		string memory deliveryPoint,
 		string memory contractTermsHash,
-		string memory tokenURI
+		string memory tokenURILiteral
 	) public onlyProvider returns (uint256) {
 		require(startDate < endDate, "Start date must be before end date.");
 		require(energyAmountMWh > 0, "Energy amount must be greater than 0 MWh.");
@@ -165,7 +165,7 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		tokenCount++;
 		uint256 newTokenId = tokenCount;
 		_mint(msg.sender, newTokenId);
-		_setTokenURI(newTokenId, tokenURI);
+		_setTokenURI(newTokenId, tokenURILiteral);
 
 		tokens[newTokenId] = Energy(
 			newTokenId,
@@ -219,34 +219,6 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		emit TokenPurchased(tokenId, msg.sender, tokenSales[tokenId].price);
 	}
 
-	// Escrow Management
-	function releaseEscrow(uint256 tokenId) public {
-		require(hasRole(ADMIN_ROLE, msg.sender), "Only admin or provider can release funds.");
-		require(escrows[tokenId].amount > 0, "No escrow for this token.");
-		require(!escrows[tokenId].fundsReleased, "Funds already released.");
-
-		address seller = ownerOf(tokenId);
-		uint256 amount = escrows[tokenId].amount;
-		escrows[tokenId].fundsReleased = true;
-
-		payable(seller).sendValue(amount);
-		emit EscrowReleased(tokenId);
-	}
-
-	function refundEscrow(uint256 tokenId) public {
-		require(hasRole(ADMIN_ROLE, msg.sender), "Only admin can refund.");
-		require(escrows[tokenId].amount > 0, "No escrow for this token.");
-		require(!escrows[tokenId].fundsReleased, "Funds already released.");
-
-		address buyer = escrows[tokenId].buyer;
-		uint256 amount = escrows[tokenId].amount;
-		escrows[tokenId].fundsReleased = true;
-
-		payable(buyer).sendValue(amount);
-		burnToken(tokenId);
-		emit EscrowRefunded(tokenId);
-	}
-
 	function burnToken(uint256 tokenId) public {
 		require(hasRole(CONSUMER_ROLE, msg.sender), "Caller is not a consumer");
 		require(ownerOf(tokenId) == msg.sender, "You must own the token to burn it.");
@@ -261,12 +233,63 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 	function raiseDispute(uint256 tokenId, uint256 _options, bytes memory _extraData) external payable {
 		require(ownerOf(tokenId) == msg.sender, "Caller is not the owner of the token");
 		uint256 disputeID = arbitrator.createDispute{value: msg.value}(_options, _extraData);
-		// Logic to link the disputeID with the tokenId if needed
 	}
 
+    function releaseFunds() public {
+        require(status == Status.Initial, "Transaction is not in Initial state.");
+
+        if (msg.sender != payer && block.timestamp - createdAt <= reclamationPeriod) {
+            revert ReleasedTooEarly();
+        }
+
+        status = Status.Resolved;
+        payee.transfer(value);
+    }
+
+    function reclaimFunds() public payable {
+        if (status != Status.Initial && status != Status.Reclaimed) {
+            revert InvalidStatus();
+        }
+        if (msg.sender != payer) {
+            revert NotPayer();
+        }
+
+        if (status == Status.Reclaimed) {
+            if (block.timestamp - reclaimedAt <= arbitrationFeeDepositPeriod) {
+                revert PayeeDepositStillPending();
+            }
+			
+			payer.transfer(address(this).balance);
+            status = Status.Resolved;
+        } else {
+            if (block.timestamp - createdAt > reclamationPeriod) {
+                revert ReclaimedTooLate();
+            }
+            uint256 requiredCost = arbitrator.arbitrationCost("");
+            if (msg.value < requiredCost) {
+                revert InsufficientPayment(msg.value, requiredCost);
+            }
+            reclaimedAt = block.timestamp;
+            status = Status.Reclaimed;
+        }
+    }
+
+
 	function rule(uint256 disputeID, uint256 ruling) external {
-		require(msg.sender == address(arbitrator), "Only the arbitrator can enforce a ruling");
-		// Apply the ruling to the dispute, potentially affecting the associated energy contract NFT
+        if (msg.sender != address(arbitrator)) {
+            revert NotArbitrator();
+        }
+        if (status != Status.Disputed) {
+            revert InvalidStatus();
+        }
+        if (ruling > numberOfRulingOptions) {
+            revert InvalidRuling(ruling, numberOfRulingOptions);
+        }
+
+        status = Status.Resolved;
+        if (ruling == uint256(RulingOptions.PayerWins)) payer.transfer(address(this).balance);
+        // else if (ruling == uint256(RulingOptions.PayeeWins)) payee.send(address(this).balance);
+        emit Ruling(arbitrator, disputeID, ruling);
 	}
 
 	// Evidence Submission
@@ -280,7 +303,3 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
 		_;
 	}
 }
-
-
-
-

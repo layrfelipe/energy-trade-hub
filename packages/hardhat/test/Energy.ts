@@ -29,7 +29,6 @@ describe("EnergyTradeHub Contract", function () {
     // Setting up roles
     await energyTradeHub.grantRole(await energyTradeHub.ADMIN_ROLE(), await admin.getAddress());
     await energyTradeHub.connect(admin).grantRole(await energyTradeHub.PROVIDER_ROLE(), await provider.getAddress());
-    // Note: Consumer role setup commented out; keep or remove based on use case
     // await energyTradeHub.connect(admin).grantRole(await energyTradeHub.CONSUMER_ROLE(), await consumer.getAddress());
   });
 
@@ -91,5 +90,31 @@ describe("EnergyTradeHub Contract", function () {
       const sale = await energyTradeHub.tokenSales(tokenID);
       expect(sale.isForSale).to.equal(true);
     });
+
+    it("testBuyEnergyToken", async function () {
+      await energyTradeHub.createToken(
+        100, // energyAmountMWh
+        50, // pricePerMWh
+        Math.floor(Date.now() / 1000), // startDate
+        Math.floor(Date.now() / 1000) + 86400, // endDate, +1 day
+        "Wind", // sourceType
+        "DP1", // deliveryPoint
+        "hash", // contractTermsHash
+        "tokenURI", // tokenURI
+      );
+
+      const tokenId = 1; // Assuming the first minted token has ID 0
+      const tokenPrice = ethers.parseEther("1");
+      await energyTradeHub.listTokenForSale(tokenId, tokenPrice);
+  
+      // Buyer buys the energy token
+      await expect(energyTradeHub.connect(admin).buyToken(tokenId, { value: tokenPrice }))
+        .to.emit(energyTradeHub, "TokenPurchased")
+        .withArgs(tokenId, admin.getAddress(), tokenPrice);
+  
+      // Verify ownership transfer
+      expect(await energyTradeHub.ownerOf(tokenId)).to.equal(await admin.getAddress());
+    });
+
   });
 });
