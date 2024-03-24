@@ -1,24 +1,31 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { Signer } from "ethers";
-import { EnergyTradeHub } from "../typechain-types";
+import { EnergyTradeHub, SimpleCentralizedArbitrator } from "../typechain-types";
 
 describe("EnergyTradeHub Contract", function () {
-  //   let EnergyTradeHub: Contract;
   let energyTradeHub: EnergyTradeHub;
+  let arbitrator: SimpleCentralizedArbitrator;
   let admin: Signer, provider: Signer, consumer: Signer;
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
     const energyTradeHubFactory = await ethers.getContractFactory("EnergyTradeHub");
+    const arbitratorFactory = await ethers.getContractFactory("SimpleCentralizedArbitrator");
 
     const signers = await ethers.getSigners();
 
     [admin, provider, consumer] = signers;
 
+    arbitrator = (await arbitratorFactory.deploy()) as SimpleCentralizedArbitrator;
+
     // Deploy a new EnergyTradeHub contract for each test
     // energyTradeHub = await energyTradeHubFactory.deploy();
-    energyTradeHub = (await energyTradeHubFactory.deploy()) as EnergyTradeHub;
+    energyTradeHub = (await energyTradeHubFactory.deploy(
+      arbitrator.getAddress(),
+      arbitrator.getAddress(),
+      "evidence",
+    )) as EnergyTradeHub;
     await energyTradeHub.waitForDeployment();
 
     // throw new Error(await energyTradeHub.PROVIDER_ROLE());
@@ -61,7 +68,7 @@ describe("EnergyTradeHub Contract", function () {
     // let tokenID: number;
 
     // beforeEach(async function () {
-      // Create a token as provider
+    // Create a token as provider
     //   const createTokenTx = await energyTradeHub.connect(provider).createToken(
     //     await provider.getAddress(),
     //     100, // energyAmountMWh
@@ -74,8 +81,8 @@ describe("EnergyTradeHub Contract", function () {
     //     "tokenURI",
     //   );
     //  await createTokenTx.wait();
-    
-     //   const event = receipt.logs
+
+    //   const event = receipt.logs
     //   .find((log) => log.event === "TokenCreated")
     //   .args.id.toNumber();
 

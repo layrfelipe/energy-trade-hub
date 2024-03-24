@@ -1071,10 +1071,21 @@ const deployedContracts = {
   },
   534351: {
     EnergyTradeHub: {
-      address: "0x262e2b50219620226C5fB5956432A88fffd94Ba7",
+      address: "0x1D13fF25b10C9a6741DFdce229073bed652197c7",
       abi: [
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "contract IArbitrator",
+              name: "_arbitrator",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_arbitrationExtraData",
+              type: "address",
+            },
+          ],
           stateMutability: "nonpayable",
           type: "constructor",
         },
@@ -1171,6 +1182,25 @@ const deployedContracts = {
             },
           ],
           name: "EscrowReleased",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
           type: "event",
         },
         {
@@ -1787,6 +1817,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "uint256",
@@ -1812,6 +1855,29 @@ const deployedContracts = {
               name: "tokenId",
               type: "uint256",
             },
+            {
+              internalType: "uint256",
+              name: "_options",
+              type: "uint256",
+            },
+            {
+              internalType: "bytes",
+              name: "_extraData",
+              type: "bytes",
+            },
+          ],
+          name: "raiseDispute",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "tokenId",
+              type: "uint256",
+            },
           ],
           name: "refundEscrow",
           outputs: [],
@@ -1827,6 +1893,13 @@ const deployedContracts = {
             },
           ],
           name: "releaseEscrow",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "renounceOwnership",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -1863,6 +1936,24 @@ const deployedContracts = {
             },
           ],
           name: "revokeRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "disputeID",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "ruling",
+              type: "uint256",
+            },
+          ],
+          name: "rule",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -2119,6 +2210,19 @@ const deployedContracts = {
         {
           inputs: [
             {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
               internalType: "uint256",
               name: "tokenId",
               type: "uint256",
@@ -2131,6 +2235,342 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
+    },
+    SimpleCentralizedArbitrator: {
+      address: "0x4DAf17c8142A483B2E2348f56ae0F2cFDAe22ceE",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_available",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_required",
+              type: "uint256",
+            },
+          ],
+          name: "InsufficientPayment",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_ruling",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_numberOfChoices",
+              type: "uint256",
+            },
+          ],
+          name: "InvalidRuling",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "enum IArbitrator.DisputeStatus",
+              name: "_current",
+              type: "uint8",
+            },
+            {
+              internalType: "enum IArbitrator.DisputeStatus",
+              name: "_expected",
+              type: "uint8",
+            },
+          ],
+          name: "InvalidStatus",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "NotOwner",
+          type: "error",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "contract IArbitrable",
+              name: "_arbitrable",
+              type: "address",
+            },
+          ],
+          name: "AppealDecision",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "contract IArbitrable",
+              name: "_arbitrable",
+              type: "address",
+            },
+          ],
+          name: "AppealPossible",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "contract IArbitrable",
+              name: "_arbitrable",
+              type: "address",
+            },
+          ],
+          name: "DisputeCreation",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              internalType: "bytes",
+              name: "_extraData",
+              type: "bytes",
+            },
+          ],
+          name: "appeal",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              internalType: "bytes",
+              name: "_extraData",
+              type: "bytes",
+            },
+          ],
+          name: "appealCost",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+          ],
+          name: "appealPeriod",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "start",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "end",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "_extraData",
+              type: "bytes",
+            },
+          ],
+          name: "arbitrationCost",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_choices",
+              type: "uint256",
+            },
+            {
+              internalType: "bytes",
+              name: "_extraData",
+              type: "bytes",
+            },
+          ],
+          name: "createDispute",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "disputeID",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+          ],
+          name: "currentRuling",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "ruling",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+          ],
+          name: "disputeStatus",
+          outputs: [
+            {
+              internalType: "enum IArbitrator.DisputeStatus",
+              name: "status",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "disputes",
+          outputs: [
+            {
+              internalType: "contract IArbitrable",
+              name: "arbitrated",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "choices",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "ruling",
+              type: "uint256",
+            },
+            {
+              internalType: "enum IArbitrator.DisputeStatus",
+              name: "status",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_disputeID",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_ruling",
+              type: "uint256",
+            },
+          ],
+          name: "rule",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {
+        appeal: "contracts/IArbitrator.sol",
+        appealCost: "contracts/IArbitrator.sol",
+        appealPeriod: "contracts/IArbitrator.sol",
+        arbitrationCost: "contracts/IArbitrator.sol",
+        createDispute: "contracts/IArbitrator.sol",
+        currentRuling: "contracts/IArbitrator.sol",
+        disputeStatus: "contracts/IArbitrator.sol",
+      },
     },
   },
 } as const;
