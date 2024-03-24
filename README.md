@@ -42,7 +42,9 @@ To get a local copy up and running follow these simple steps.
    ```
 4. **Start the development server**
    ```sh
-   yarn start
+   yarn chain
+   (new tab) yarn deploy
+   (new tab) yarn start
    ```
 
 ## 📝 Usage
