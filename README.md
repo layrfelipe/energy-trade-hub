@@ -1,4 +1,3 @@
-```markdown
 # Energy Trade Hub: A Web3 Marketplace for Energy Trading in Brazil
 
 Welcome to the **Energy Trade Hub**, a pioneering Web3 marketplace dedicated to revolutionizing energy trading in Brazil. Leveraging the power of blockchain technology, this platform enables seamless trade of energy tokens, representing various types of domestically generated energy. Aimed at facilitating a more advantageous, practical, and efficient negotiation process for energy generators and retail traders, Energy Trade Hub is set to be a game-changer in the industry.
