@@ -130,7 +130,6 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 
 	// Token Lifecycle Management
 	function createToken(
-		address issuer,
 		uint256 energyAmountMWh,
 		uint256 pricePerMWh,
 		uint256 startDate,
@@ -145,13 +144,13 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 
 		tokenCount++;
 		uint256 newTokenId = tokenCount;
-		_mint(issuer, newTokenId);
+		_mint(msg.sender, newTokenId);
 		_setTokenURI(newTokenId, tokenURI);
 
 		tokens[newTokenId] = Energy(
 			newTokenId,
-			issuer,
-			issuer, // Initially, the issuer is the owner
+			msg.sender,
+			msg.sender, // Initially, the issuer is the owner
 			energyAmountMWh,
 			pricePerMWh,
 			startDate,
@@ -164,8 +163,8 @@ contract EnergyTradeHub is ERC721URIStorage, ReentrancyGuard, AccessControl, Own
 
 		emit TokenCreated(
 			newTokenId,
-			issuer,
-			issuer,
+			msg.sender,
+			msg.sender,
 			energyAmountMWh,
 			pricePerMWh,
 			startDate,

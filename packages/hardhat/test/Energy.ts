@@ -14,13 +14,11 @@ describe("EnergyTradeHub Contract", function () {
     const arbitratorFactory = await ethers.getContractFactory("SimpleCentralizedArbitrator");
 
     const signers = await ethers.getSigners();
-
     [admin, provider, consumer] = signers;
 
     arbitrator = (await arbitratorFactory.deploy()) as SimpleCentralizedArbitrator;
 
     // Deploy a new EnergyTradeHub contract for each test
-    // energyTradeHub = await energyTradeHubFactory.deploy();
     energyTradeHub = (await energyTradeHubFactory.deploy(
       arbitrator.getAddress(),
       arbitrator.getAddress(),
@@ -28,20 +26,17 @@ describe("EnergyTradeHub Contract", function () {
     )) as EnergyTradeHub;
     await energyTradeHub.waitForDeployment();
 
-    // throw new Error(await energyTradeHub.PROVIDER_ROLE());
+    // Setting up roles
     await energyTradeHub.grantRole(await energyTradeHub.ADMIN_ROLE(), await admin.getAddress());
     await energyTradeHub.connect(admin).grantRole(await energyTradeHub.PROVIDER_ROLE(), await provider.getAddress());
+    // Note: Consumer role setup commented out; keep or remove based on use case
     // await energyTradeHub.connect(admin).grantRole(await energyTradeHub.CONSUMER_ROLE(), await consumer.getAddress());
-
-    // Set up roles
-    // await energyTradeHub.addProvider(await provider.getAddress());
-    // await energyTradeHub.connect(consumer).registerAsConsumer();
   });
 
   describe("Deployment", function () {
     it("Should set the right admin", async function () {
       const ADMIN_ROLE = await energyTradeHub.ADMIN_ROLE();
-      expect(await energyTradeHub.hasRole(ADMIN_ROLE, admin)).to.be.true;
+      expect(await energyTradeHub.hasRole(ADMIN_ROLE, await admin.getAddress())).to.be.true;
     });
   });
 
@@ -57,7 +52,6 @@ describe("EnergyTradeHub Contract", function () {
     it("Should allow admin to register consumers", async function () {
       const addConsumerTx = await energyTradeHub.addConsumer(await consumer.getAddress());
       await addConsumerTx.wait();
-
       expect(await energyTradeHub.hasRole(await energyTradeHub.CONSUMER_ROLE(), await consumer.getAddress())).to.equal(
         true,
       );
@@ -65,35 +59,9 @@ describe("EnergyTradeHub Contract", function () {
   });
 
   describe("Token Management", function () {
-    // let tokenID: number;
-
-    // beforeEach(async function () {
-    // Create a token as provider
-    //   const createTokenTx = await energyTradeHub.connect(provider).createToken(
-    //     await provider.getAddress(),
-    //     100, // energyAmountMWh
-    //     10, // pricePerMWh
-    //     Math.floor(Date.now() / 1000), // startDate
-    //     Math.floor(Date.now() / 1000) + 1000, // endDate
-    //     "Solar", // sourceType
-    //     "PointA", // deliveryPoint
-    //     "hash_here", // contractTermsHash
-    //     "tokenURI",
-    //   );
-    //  await createTokenTx.wait();
-
-    //   const event = receipt.logs
-    //   .find((log) => log.event === "TokenCreated")
-    //   .args.id.toNumber();
-
-    //   tokenID = event?.args?.id.toNumber();
-    // });
-
     it("Should create a token correctly", async function () {
-      // Listening for the TokenCreated event
       await expect(
         energyTradeHub.createToken(
-          await admin.getAddress(),
           100, // energyAmountMWh
           50, // pricePerMWh
           Math.floor(Date.now() / 1000), // startDate
@@ -108,7 +76,6 @@ describe("EnergyTradeHub Contract", function () {
 
     it("Should allow token listing for sale", async function () {
       await energyTradeHub.createToken(
-        await admin.getAddress(),
         100, // energyAmountMWh
         50, // pricePerMWh
         Math.floor(Date.now() / 1000), // startDate
