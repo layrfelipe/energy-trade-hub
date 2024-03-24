@@ -32,7 +32,7 @@ contract SimpleCentralizedArbitrator is IArbitrator {
     }
 
     function appealCost(uint256 _disputeID, bytes memory _extraData) public pure override returns (uint256) {
-        return 2**250; // An unaffordable amount which practically avoids appeals.
+        return 2**250;
     }
 
     function createDispute(uint256 _choices, bytes memory _extraData)
@@ -79,7 +79,7 @@ contract SimpleCentralizedArbitrator is IArbitrator {
         dispute.ruling = _ruling;
         dispute.status = DisputeStatus.Solved;
 
-        payable(msg.sender).send(arbitrationCost(""));
+        payable(msg.sender).transfer(arbitrationCost(""));
         dispute.arbitrated.rule(_disputeID, _ruling);
     }
 
