@@ -25,20 +25,36 @@
                 flex-direction: column;
                 align-items: flex-start;
 
-                h2 {
-                    text-align: left;
-                    color: white;
-                    font-size: 2rem;
-                    margin-left: 1vw;
-                    font-weight: 600;
+                .filtersHeader {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+
+                    h2 {
+                        text-align: left;
+                        color: white;
+                        font-size: 2rem;
+                        margin-left: 1vw;
+                        font-weight: 600;
+                        }
+
+                    button {
+                        padding: 0;
+                        cursor: pointer;
+                        margin-left: 2vw;
+                        border: 1px solid white;
+                        padding: 0 2vw;
+                        color: white;
+                    }
                 }
+
 
                 .filtersContent {
                     width: 100%;
-                    margin-top: 2vh;
+                    margin-top: 3vh;
                     padding: 0 1vw;
 
-                    .toggleFilter {
+                    .regionFilter {
                         width: 50%;
                         background: white;
                         border-radius: 5px;
@@ -47,13 +63,9 @@
                         padding: 1vh .5vw;
                         align-items: center;
 
-                        h4 {
-                            font-size: 1rem;
-                            font-weight: 500;
-                            color: #430C6F;
-                        }
-
-                        #toggleIconWrapper {
+                        select {
+                            width: 100%;
+                            outline: none;
                             cursor: pointer;
                         }
                     }
@@ -82,6 +94,16 @@
                                 padding: 1vh 0 1vh .25vw;
                                 outline: none;
                                 width: 40%;
+                                border: 2px solid transparent;
+                            }
+
+                            input::-webkit-outer-spin-button,
+                            input::-webkit-inner-spin-button {
+                                display: none;
+                            }
+
+                            input:invalid {
+                                border: 2px solid red;
                             }
 
                             span {
@@ -102,18 +124,24 @@
                             color: white;
                             font-size: 1.5rem;
                             font-weight: 400;
-                        }                    
+                        }       
                         
-                        ul {
-                            text-decoration: none;
-
-                            li {
-                                color: #C2BAC9;
-                                margin: 1vh 0;
+                        .inputWrapper {
+                            display: flex;
+                            justify-content: flex-start;
+                            margin: 1vh 0;
+                            cursor: pointer;
+                            
+                            input, label {
                                 cursor: pointer;
                             }
 
-                            li:hover {
+                            label {
+                                margin-left: .5vw;
+                                color: #c2bac9;
+                            }
+
+                            label:hover {
                                 color: #eeecf0;
                             }
                         }
