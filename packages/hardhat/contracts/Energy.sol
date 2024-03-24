@@ -289,6 +289,7 @@ contract EnergyTradeHub is ERC721URIStorage, ERC721Enumerable, ReentrancyGuard, 
         status = Status.Resolved;
         if (ruling == uint256(RulingOptions.PayerWins)) payer.transfer(address(this).balance);
         // else if (ruling == uint256(RulingOptions.PayeeWins)) payee.send(address(this).balance);
+		// else payee.send(address(this).balance / 2);
         emit Ruling(arbitrator, disputeID, ruling);
 	}
 

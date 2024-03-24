@@ -15,6 +15,9 @@ Welcome to the **Energy Trade Hub**, a pioneering Web3 marketplace dedicated to 
 - **OpenZeppelin Contracts**: Utilizing industry-standard secure smart contracts for ERC721 (NFT) and Access Control.
 - **Kleros Contracts**: Integrating dispute resolution mechanisms with ERC 792 (Arbitration) and ERC-1497 (Evidence) standards.
 - **HardHat**: A development environment for testing, compiling, and deploying Ethereum software.
+- **Deployed on Scroll Sepolia**: The contract is deployed at [0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc](https://sepolia.scrollscan.com/address/0x8ea0cA1979cA397A3c6bcD472EDe92B2b6f558Bc)
+- **Hosted by Vercel**: Dapp is [LIVE](https://ethsamba-2024-1obxkyarl-wlademyr-mendes-projects.vercel.app)
+
 
 ## 📚 Getting Started
 
@@ -30,29 +33,30 @@ To get a local copy up and running follow these simple steps.
 
 1. **Clone the repo**
    ```sh
-   git clone https://github.com/your-username/energy-trade-hub.git
+   git clone https://github.com/layrfelipe/ethsamba-2024.git
    ```
 2. **Navigate to the project directory**
    ```sh
-   cd energy-trade-hub
+   cd ethsamba-2024
    ```
 3. **Install NPM packages**
    ```sh
    yarn install
    ```
-4. **Start the development server**
-   ```sh
-   yarn chain
-   (new tab) yarn deploy
-   (new tab) yarn start
-   ```
+4. **Start the development environment**
+   - Start the local Ethereum chain
+     ```sh
+     yarn chain
+     ```
+   - Deploy contracts to the local chain (in a new terminal tab)
+     ```sh
+     yarn deploy
+     ```
+   - Start the frontend application (in a new terminal tab)
+     ```sh
+     yarn start
+     ```
 
 ## 📝 Usage
 
-After starting the development server, the web application will be accessible at `http://localhost:3000`. From there, you can explore the various functionalities of the Energy Trade Hub, including viewing available energy tokens, initiating trades, and more.
-
-## 📦 Deployment
-
-For instructions on deploying the Energy Trade Hub to a live environment, please refer to the deployment section of the HardHat documentation.
-
-```
+After starting the development server, the web application will be accessible at `http://localhost:3000`.
