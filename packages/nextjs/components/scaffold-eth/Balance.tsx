@@ -17,13 +17,6 @@ type BalanceProps = {
 export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
   const { targetNetwork } = useTargetNetwork();
   const { balance, price, isError, isLoading } = useAccountBalance(address);
-  const [displayUsdMode, setDisplayUsdMode] = useState(price > 0 ? Boolean(usdMode) : false);
-
-  const toggleBalanceMode = () => {
-    if (price > 0) {
-      setDisplayUsdMode(prevMode => !prevMode);
-    }
-  };
 
   if (!address || isLoading || balance === null) {
     return (
@@ -45,23 +38,9 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
   }
 
   return (
-    <button
-      className={`btn btn-sm btn-ghost flex flex-col font-normal items-center hover:bg-transparent ${className}`}
-      onClick={toggleBalanceMode}
-    >
       <div className="w-full flex items-center justify-center">
-        {displayUsdMode ? (
-          <>
-            <span className="text-[0.8em] font-bold mr-1">$</span>
-            <span>{(balance * price).toFixed(2)}</span>
-          </>
-        ) : (
-          <>
-            <span>{balance?.toFixed(4)}</span>
-            <span className="text-[0.8em] font-bold ml-1">{targetNetwork.nativeCurrency.symbol}</span>
-          </>
-        )}
+        <span style={{ color: 'white' }}>{balance?.toFixed(4)}</span>
+        <span className="text-[0.8em] font-bold ml-1">{targetNetwork.nativeCurrency.symbol}</span>
       </div>
-    </button>
   );
 };
